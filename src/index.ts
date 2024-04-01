@@ -5,6 +5,7 @@ import {
   tableDelete,
   tableInsert,
   tableQuery,
+  tableRunSql,
   tableUpdate,
 } from "./main/table";
 import { apis } from "./main/tests";
@@ -69,9 +70,10 @@ const post = (
       params.push(req.params[key]);
     }
 
-    let message = tableInsert(database, sql, params);
-    if (message === "SUCCESS") res.status(200).json(message);
-    else res.status(500).json(message);
+    tableRunSql(database, sql, params, (error) => {
+      if (error) res.status(500).json(error.message);
+      else res.status(200).json("SUCCESS");  
+    });
   });
 };
 

@@ -3,9 +3,9 @@
     "users": {
       "sqlTableData": {
         "id": "INTEGER PRIMARY KEY",
-        "username": "",
-        "email": "",
-        "password": ""
+        "username": "TEXT",
+        "email": "TEXT NOT NULL UNIQUE",
+        "password": "TEXT"
       },
       "link": []
     }
