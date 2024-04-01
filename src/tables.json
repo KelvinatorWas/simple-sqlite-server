@@ -1,0 +1,20 @@
+{
+  "tables": {
+    "users": {
+      "sqlTableData": {
+        "id": "INTEGER PRIMARY KEY",
+        "username": "",
+        "email": "",
+        "password": ""
+      },
+      "link": []
+    }
+  },
+  "api": {
+    "/users/:id": {
+      "method": "GET",
+      "sql": "SELECT * FROM users WHERE id = ?"
+    }
+  }
+
+}

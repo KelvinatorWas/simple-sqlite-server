@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node src/test.ts",
     "build": "tsc",
     "serve": "node dist/index.js",
     "nodemon": "nodemon --exec ts-node src/index.ts"
@@ -21,6 +21,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
+    "body-parser": "^1.20.2",
     "sql-template-strings": "^2.2.2",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
