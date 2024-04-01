@@ -18,7 +18,7 @@ const tableInsert = (db: Database, tableName:string, sqlData:string[], dataValue
   });
 }
 
-const tableQuery = (db: Database, tableName:string, sqlData:string[] | string = "*", query = "", params:(string|number)[] = [], setter?: (data:unknown[]) => void, ) => {
+const old_tableQuery = (db: Database, tableName:string, sqlData:string[] | string = "*", query = "", params:(string|number)[] = [], setter?: (data:unknown[]) => void, ) => {
   const sql = `SELECT ${typeof sqlData === "string" ? sqlData : sqlData.join(", ")} FROM ${tableName} ${query}`;
 
   db.all(sql, params, (err, rows) => {
@@ -28,7 +28,15 @@ const tableQuery = (db: Database, tableName:string, sqlData:string[] | string = 
       setter(rows);
     }
   });
+}
 
+const tableQuery = (db: Database, sql:string, params:string[], setter?: (data:unknown[]) => void) => {
+  db.all(sql, params, (err, rows) => {
+    hasError(err);
+    
+    if (setter) setter(rows);
+    
+  });
 }
 
 const tableUpdate = (db: Database, tableName:string, sqlData:string , dataValues:(string|number)[]) => {

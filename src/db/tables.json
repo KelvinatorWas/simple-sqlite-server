@@ -9,12 +9,5 @@
       },
       "link": []
     }
-  },
-  "api": {
-    "/users/:id": {
-      "method": "GET",
-      "sql": "SELECT * FROM users WHERE id = ?"
-    }
   }
-
 }

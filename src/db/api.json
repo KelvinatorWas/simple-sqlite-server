@@ -1,0 +1,16 @@
+{
+  "api": {
+    "/users/:id": {
+      "method": "GET",
+      "sql": "SELECT * FROM users WHERE id = ?",
+      "keys": ["id"]
+    },
+
+    "/users": {
+      "method": "GET",
+      "sql": "SELECT * FROM users",
+      "keys": []
+    }
+
+  }
+}
