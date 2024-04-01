@@ -25,24 +25,16 @@ const database = new Database(
   }
 );
 
-app.post("/post", (req, res) => {
-  try {
-    console.log(req.body);
-    res.json({
-      status: 200,
-      success: true,
-    });
-  } catch (error) {
-    return res.json({
-      status: 400,
-      success: false,
-    });
-  }
-});
 
-const get = (path: string, sql: string, paramKeys: string[]) => {
+
+const get = (path: string, sql: string, paramKeys: string[], body: string[]) => {
   app.get(path, async (req, res) => {
     const params: string[] = [];
+    const dataOfBody = req.body;
+
+    for (let key of body) {
+      params.push(dataOfBody[key]);
+    }
 
     for (let key of paramKeys) {
       params.push(req.params[key]);
@@ -115,7 +107,6 @@ const put = (
       params.push(req.params[key]);
     }
 
-    console.log(params);
 
     const message = tableUpdate(database, sql, params);
     if (message === "SUCCESS") res.status(200).json(message);
@@ -128,22 +119,19 @@ for (let i = 0; i < apis.length; i++) {
 
   switch (method) {
     case "GET": {
-      get(path, sql, keys);
+      get(path, sql, keys, body);
       break;
     }
     case "POST": {
-      // console.log("keys: ", keys, " | Method: ", method);
       post(path, sql, keys, body);
       break;
     }
     case "DELETE": {
-      // console.log("keys: ", keys, " | Method: ", method);
       remove(path, sql, keys);
       break;
     }
 
     case "PUT": {
-      // console.log("keys: ", keys, " | Method: ", method);
       put(path, sql, keys, body);
       break;
     }
