@@ -2,5 +2,6 @@ export type apiData = {
   path: string,
   method: string,
   sql: string,
-  keys: string[]
+  keys: string[],
+  body: string[],
 }

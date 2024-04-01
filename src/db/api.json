@@ -1,16 +1,38 @@
 {
   "api": {
-    "/users/:id": {
-      "method": "GET",
-      "sql": "SELECT * FROM users WHERE id = ?",
-      "keys": ["id"]
+    "GET": {
+      "/users/:id": {
+        "sql": "SELECT * FROM users WHERE id = ?",
+        "keys": ["id"]
+      },
+
+      "/users": {
+        "sql": "SELECT * FROM users",
+        "keys": []
+      }
     },
 
-    "/users": {
-      "method": "GET",
-      "sql": "SELECT * FROM users",
-      "keys": []
-    }
+    "POST": {
+      "/users": {
+        "sql": "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+        "keys": [],
+        "body": ["username", "email", "password"]
+      }
+    },
 
+    "DELETE": {
+      "/users/:id": {
+        "sql": "DELETE FROM users WHERE id=?",
+        "keys": ["id"]
+      }
+    },
+
+    "PUT": {
+      "/users/username/:id": {
+        "sql": "UPDATE users SET username=? WHERE id=?",
+        "keys": [ "id"],
+        "body": ["username"]
+      }
+    }
   }
 }
